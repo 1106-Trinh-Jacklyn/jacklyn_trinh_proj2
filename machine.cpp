@@ -76,47 +76,68 @@ void Machine::parse(const string& line){
 }
 
 void Machine::addCmd(uint32_t num1, uint32_t num2){
-    uint32_t sum = num1 + num2;
-    bool overflow = ((sum < num1) || (sum < num2));
+    uint32_t result = num1 + num2;
 
-    cout << endl << "ADD 0x" << hex << uppercase << num1 << " 0x" << num2 << ": 0x" << sum << endl;
-    
-    if(overflow){
-        cout << "Overflow: yes" << endl;
+    print();
+
+}
+
+void Machine::andCmd(uint32_t num1, uint32_t num2){
+    uint32_t result = num1 & num2;
+
+    print();
+}
+
+void Machine::asrCmd(uint32_t num, int shift){
+
+}
+
+void Machine::lsrCmd(uint32_t num, int shift){
+
+}
+
+void Machine::lslCmd(uint32_t num, int shift){
+
+}
+
+void Machine::notCmd(uint32_t num){
+
+}
+
+void Machine::orrCmd(uint32_t num1, uint32_t num2){
+
+}
+
+void Machine::subCmd(uint32_t num1, uint32_t num2){
+
+}
+
+void Machine::xorCmd(uint32_t num1, uint32_t num2){
+
+}
+
+void Machine::print(string& operation, uint32_t num1, uint32_t num2, uint32_t result){
+    cout << operation << " 0x" << hex << uppercase << num1 << " 0x" << num2 << ": 0x" << result << endl;
+    cout << "N: " << N << " Z: " << Z << endl;
+}
+
+void Machine::printNot(string& operation, uint32_t num, uint32_t result){
+    cout << operation << " 0x" << hex << uppercase << num << ": 0x" << result << endl;
+    cout << "N: " << N << " Z: " << Z << endl;
+}
+
+void Machine::flag(uint32_t result){
+    if(result == 0){
+        Z = 1;
     }
     else{
-        cout << "Overflow: no" << endl;
+        Z = 0;
     }
-}
 
-void andCmd(uint32_t num1, uint32_t num2){
-
-}
-
-void asrCmd(uint32_t num, int shift){
-
-}
-
-void lsrCmd(uint32_t num, int shift){
-
-}
-
-void lslCmd(uint32_t num, int shift){
-
-}
-
-void notCmd(uint32_t num){
-
-}
-
-void orrCmd(uint32_t num1, uint32_t num2){
-
-}
-
-void subCmd(uint32_t num1, uint32_t num2){
-
-}
-
-void xorCmd(uint32_t num1, uint32_t num2){
-
+    if((result & 0x80000000) == 0){
+        N = 0;
+    }
+    else{
+        N = 1;
+    }
 }
