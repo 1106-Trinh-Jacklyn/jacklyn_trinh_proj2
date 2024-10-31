@@ -46,12 +46,36 @@ void Machine::parse(const string& line){
     uint32_t num1 = stoul(hex1, nullptr, 16);
     uint32_t num2 = stoul(hex2, nullptr, 16);
 
-    if(operation == "ADD"){
-        add(num1, num2);
+    if(operation == "ADD" || operation == "ADDS"){
+        addCmd(num1, num2);
+    }
+    if(operation == "AND" || operation == "ANDS"){
+        addCmd(num1, num2);
+    }
+    if(operation == "ASR" || operation == "ASRS"){
+        asrCmd(num1, num2);
+    }
+    if(operation == "LSR" || operation == "LSRS"){
+        lsrCmd(num1, num2);
+    }
+    if(operation == "LSL" || operation == "LSLS"){
+        lslCmd(num1, num2);
+    }
+    if(operation == "NOT" || operation == "NOTS"){
+        notCmd(num1);
+    }
+    if(operation == "ORR" || operation == "ORRS"){
+        orrCmd(num1, num2);
+    }
+    if(operation == "SUB" || operation == "SUBS"){
+        subCmd(num1, num2);
+    }
+    if(operation == "XOR" || operation == "XORS"){
+        xorCmd(num1, num2);
     }
 }
 
-void Machine::add(uint32_t num1, uint32_t num2){
+void Machine::addCmd(uint32_t num1, uint32_t num2){
     uint32_t sum = num1 + num2;
     bool overflow = ((sum < num1) || (sum < num2));
 
@@ -63,4 +87,36 @@ void Machine::add(uint32_t num1, uint32_t num2){
     else{
         cout << "Overflow: no" << endl;
     }
+}
+
+void andCmd(uint32_t num1, uint32_t num2){
+
+}
+
+void asrCmd(uint32_t num, int shift){
+
+}
+
+void lsrCmd(uint32_t num, int shift){
+
+}
+
+void lslCmd(uint32_t num, int shift){
+
+}
+
+void notCmd(uint32_t num){
+
+}
+
+void orrCmd(uint32_t num1, uint32_t num2){
+
+}
+
+void subCmd(uint32_t num1, uint32_t num2){
+
+}
+
+void xorCmd(uint32_t num1, uint32_t num2){
+
 }
