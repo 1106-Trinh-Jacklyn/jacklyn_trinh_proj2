@@ -44,159 +44,163 @@ void Machine::parse(const string& line){
     }
 
     uint32_t num1 = stoul(hex1, nullptr, 16);
-    uint32_t num2 = stoul(hex2, nullptr, 16);
+    uint32_t num2 = 0;
+
+    if(!hex2.empty()){
+        num2 = stoul(hex2, nullptr, 16);
+    }
 
     if(operation == "ADD"){
-        addCmd(num1, num2);
+        addCmd(num1, num2, operation);
     }
     if(operation == "ADDS"){
-        addsCmd(num1, num2);
+        addsCmd(num1, num2, operation);
     }
     if(operation == "AND"){
-        andCmd(num1, num2);
+        andCmd(num1, num2, operation);
     }
     if(operation == "ANDS"){
-        andsCmd(num1, num2);
+        andsCmd(num1, num2, operation);
     }
     if(operation == "ASR"){
-        asrCmd(num1, num2);
+        asrCmd(num1, num2, operation);
     }
     if(operation == "ASRS"){
-        asrsCmd(num1, num2);
+        asrsCmd(num1, num2, operation);
     }
     if(operation == "LSR"){
-        lsrCmd(num1, num2);
+        lsrCmd(num1, num2, operation);
     }
     if(operation == "LSRS"){
-        lsrsCmd(num1, num2);
+        lsrsCmd(num1, num2, operation);
     }
     if(operation == "LSL"){
-        lslCmd(num1, num2);
+        lslCmd(num1, num2, operation);
     }
     if(operation == "LSLS"){
-        lslsCmd(num1, num2);
+        lslsCmd(num1, num2, operation);
     }
     if(operation == "NOT"){
-        notCmd(num1);
+        notCmd(num1, operation);
     }
     if(operation == "NOTS"){
-        notsCmd(num1);
+        notsCmd(num1, operation);
     }
     if(operation == "ORR"){
-        orrCmd(num1, num2);
+        orrCmd(num1, num2, operation);
     }
     if(operation == "ORRS"){
-        orrsCmd(num1, num2);
+        orrsCmd(num1, num2, operation);
     }
     if(operation == "SUB"){
-        subCmd(num1, num2);
+        subCmd(num1, num2, operation);
     }
     if(operation == "SUBS"){
-        subsCmd(num1, num2);
+        subsCmd(num1, num2, operation);
     }
     if(operation == "XOR"){
-        xorCmd(num1, num2);
+        xorCmd(num1, num2, operation);
     }
     if(operation == "XORS"){
-        xorsCmd(num1, num2);
+        xorsCmd(num1, num2, operation);
     }
 }
 
-void Machine::addCmd(uint32_t num1, uint32_t num2){
+void Machine::addCmd(uint32_t num1, uint32_t num2, string operation){
     uint32_t result = num1 + num2;
     print(operation, num1, num2, result);
 }
 
-void Machine::addsCmd(uint32_t num1, uint32_t num2){
+void Machine::addsCmd(uint32_t num1, uint32_t num2, string operation){
     uint32_t result = num1 + num2;
     flag(result);
     print(operation, num1, num2, result);
 }
 
-void Machine::andCmd(uint32_t num1, uint32_t num2){
+void Machine::andCmd(uint32_t num1, uint32_t num2, string operation){
     uint32_t result = num1 & num2;
     print(operation, num1, num2, result);
 }
 
-void Machine::andsCmd(uint32_t num1, uint32_t num2){
+void Machine::andsCmd(uint32_t num1, uint32_t num2, string operation){
     uint32_t result = num1 & num2;
     flag(result);
     print(operation, num1, num2, result);
 }
 
-void Machine::asrCmd(uint32_t num, int shift){
-    uint32_t result = 
-    print(operation, num1, num2, result);
+void Machine::asrCmd(uint32_t num, int shift, string operation){
+    uint32_t result = (int32_t)num >> shift;
+    printShift(operation, num, shift, result);
 }
 
-void Machine::asrsCmd(uint32_t num, int shift){
-    uint32_t result = 
+void Machine::asrsCmd(uint32_t num, int shift, string operation){
+    uint32_t result = (int32_t)num >> shift;
     flag(result);
-    print(operation, num1, num2, result);
+    printShift(operation, num, shift, result);
 }
 
-void Machine::lsrCmd(uint32_t num, int shift){
-    uint32 result = num >> shift;
-    print(operation, num1, num2, result);
+void Machine::lsrCmd(uint32_t num, int shift, string operation){
+    uint32_t result = num >> shift;
+    printShift(operation, num, shift, result);
 }
 
-void Machine::lsrsCmd(uint32_t num, int shift){
-    uint32 result = num >> shift;
+void Machine::lsrsCmd(uint32_t num, int shift, string operation){
+    uint32_t result = num >> shift;
     flag(result);
-    print(operation, num1, num2, result);
+    printShift(operation, num, shift, result);
 }
 
-void Machine::lslCmd(uint32_t num, int shift){
-    uint32 result = num << shift;
-    print(operation, num1, num2, result);
+void Machine::lslCmd(uint32_t num, int shift, string operation){
+    uint32_t result = num << shift;
+    printShift(operation, num, shift, result);
 }
 
-void Machine::lslsCmd(uint32_t num, int shift){
-    uint32 result = num << shift;
+void Machine::lslsCmd(uint32_t num, int shift, string operation){
+    uint32_t result = num << shift;
     flag(result);
-    print(operation, num1, num2, result);
+    printShift(operation, num, shift, result);
 }
 
-void Machine::notCmd(uint32_t num){
-    uint32 result = ~num;
+void Machine::notCmd(uint32_t num, string operation){
+    uint32_t result = ~num;
     print(operation, num, result);
 }
 
-void Machine::notsCmd(uint32_t num){
-    uint32 result = ~num;
+void Machine::notsCmd(uint32_t num, string operation){
+    uint32_t result = ~num;
     flag(result);
     print(operation, num, result);
 }
 
-void Machine::orrCmd(uint32_t num1, uint32_t num2){
-    uint32 result = num1 | num2;
+void Machine::orrCmd(uint32_t num1, uint32_t num2, string operation){
+    uint32_t result = num1 | num2;
     print(operation, num1, num2, result);
 }
 
-void Machine::orrsCmd(uint32_t num1, uint32_t num2){
-    uint32 result = num 1 | num2;
+void Machine::orrsCmd(uint32_t num1, uint32_t num2, string operation){
+    uint32_t result = num1 | num2;
     flag(result);
     print(operation, num1, num2, result);
 }
 
-void Machine::subCmd(uint32_t num1, uint32_t num2){
-    uint32 result = num1 - num2;
+void Machine::subCmd(uint32_t num1, uint32_t num2, string operation){
+    uint32_t result = num1 - num2;
     print(operation, num1, num2, result);
 }
 
-void Machine::subsCmd(uint32_t num1, uint32_t num2){
-    uint32 result = num1 - num2;
+void Machine::subsCmd(uint32_t num1, uint32_t num2, string operation){
+    uint32_t result = num1 - num2;
     flag(result);
     print(operation, num1, num2, result);
 }
 
-void Machine::xorCmd(uint32_t num1, uint32_t num2){
-    uint32 result = num1 ^ num2;
+void Machine::xorCmd(uint32_t num1, uint32_t num2, string operation){
+    uint32_t result = num1 ^ num2;
     print(operation, num1, num2, result);
 }
 
-void Machine::xorsCmd(uint32_t num1, uint32_t num2){
-    uint32 result = num1 ^ num2;
+void Machine::xorsCmd(uint32_t num1, uint32_t num2, string operation){
+    uint32_t result = num1 ^ num2;
     flag(result);
     print(operation, num1, num2, result);
 }
@@ -208,6 +212,11 @@ void Machine::print(string& operation, uint32_t num1, uint32_t num2, uint32_t re
 
 void Machine::print(string& operation, uint32_t num, uint32_t result){
     cout << operation << " 0x" << hex << uppercase << num << ": 0x" << result << endl;
+    cout << "N: " << N << " Z: " << Z << endl;
+}
+
+void Machine::printShift(string& operation, uint32_t num, int shift, uint32_t result){
+    cout << operation << " 0x" << hex << uppercase << num << " " << shift << ": 0x" << result << endl;
     cout << "N: " << N << " Z: " << Z << endl;
 }
 
