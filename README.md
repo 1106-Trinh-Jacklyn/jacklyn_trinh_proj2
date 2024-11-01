@@ -11,7 +11,7 @@ Working Process:
 2. Each line is split into an operation and two hexadecimal values.
 3. The two hexadecimal values are then stored using uint32_t.
 4. For two operand commands (commands beside NOT and NOTS), the program process two values. For one operand commands, the program processes one value.
-5. If the command if followed by an 'S', the flags are updated.
+5. If the command if followed by an 'S', the flags are updated. If the result is 0, Z = 1. Otherwise, Z = 0. If the result is negative, N = 1. Otherwise, N = 0.
 6. The inputs and results are then displayed in hexadecimal format following the example format. The N and Z flags are also displayed.
 
 Results:
