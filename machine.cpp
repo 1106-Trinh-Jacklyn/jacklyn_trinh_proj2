@@ -136,38 +136,68 @@ void Machine::asrsCmd(uint32_t num, int shift){
 }
 
 void Machine::lsrCmd(uint32_t num, int shift){
-    uint32 result = 
+    uint32 result = num >> shift;
     print(operation, num1, num2, result);
 }
 
 void Machine::lsrsCmd(uint32_t num, int shift){
-    uint32 result = 
+    uint32 result = num >> shift;
     flag(result);
     print(operation, num1, num2, result);
 }
 
 void Machine::lslCmd(uint32_t num, int shift){
-    uint32 result = 
+    uint32 result = num << shift;
+    print(operation, num1, num2, result);
+}
+
+void Machine::lslsCmd(uint32_t num, int shift){
+    uint32 result = num << shift;
+    flag(result);
     print(operation, num1, num2, result);
 }
 
 void Machine::notCmd(uint32_t num){
-    uint32 result = 
-    print(operation, num1, num2, result);
+    uint32 result = ~num;
+    print(operation, num, result);
+}
+
+void Machine::notsCmd(uint32_t num){
+    uint32 result = ~num;
+    flag(result);
+    print(operation, num, result);
 }
 
 void Machine::orrCmd(uint32_t num1, uint32_t num2){
-    uint32 result = 
+    uint32 result = num1 | num2;
+    print(operation, num1, num2, result);
+}
+
+void Machine::orrsCmd(uint32_t num1, uint32_t num2){
+    uint32 result = num 1 | num2;
+    flag(result);
     print(operation, num1, num2, result);
 }
 
 void Machine::subCmd(uint32_t num1, uint32_t num2){
-    uint32 result = 
+    uint32 result = num1 - num2;
+    print(operation, num1, num2, result);
+}
+
+void Machine::subsCmd(uint32_t num1, uint32_t num2){
+    uint32 result = num1 - num2;
+    flag(result);
     print(operation, num1, num2, result);
 }
 
 void Machine::xorCmd(uint32_t num1, uint32_t num2){
-    uint32 result = 
+    uint32 result = num1 ^ num2;
+    print(operation, num1, num2, result);
+}
+
+void Machine::xorsCmd(uint32_t num1, uint32_t num2){
+    uint32 result = num1 ^ num2;
+    flag(result);
     print(operation, num1, num2, result);
 }
 
